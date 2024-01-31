@@ -1,0 +1,39 @@
+-1er Script- 
+
+El script creado tiene como objetivo obtener información sobre los activos disponibles como garantía (collateral) en la plataforma Bybit, así como sus tasas de financiamiento actuales.
+
+Utiliza la API de Bybit para obtener una lista de activos que pueden ser utilizados como garantía (collateral) en la plataforma.
+
+Utiliza la API de Bybit para obtener las tasas de financiamiento actuales para diferentes pares de activos.
+
+Crea un DataFrame de pandas que combina la información de los activos disponibles como garantía y sus tasas de financiamiento actuales.
+
+Se crea el DataFrame y lo imprime en la consola. Además, guarda el DataFrame en un archivo Excel (Vacio en mi caso por no tener activos en mi cuenta).
+
+En resumen, Script útil para los que deseen monitorear y analizar las tasas de financiamiento actuales en Bybit, específicamente para los activos disponibles como garantía. La información recopilada puede ser valiosa para tomar decisiones informadas en el contexto de estrategias y gestión de activos.
+
+----------------------------------------------------------------------
+
+Credenciales de servicio de Google Sheets. 
+
+- No las pude conseguir porque hasta un punto es pago, no quise poner mi tarjeta (se puede discutir).
+
+----------------------------------------------------------------------
+
+-2do Script-
+
+Este script está diseñado para enviar un DataFrame de pandas a una hoja de cálculo de Google Sheets.
+
+El DataFrame resultante contiene información sobre activos admitidos como garantía y sus tasas de financiamiento. 
+
+Este DataFrame se imprime en la consola antes de enviarlo a Google Sheets, y también se puede verificar si está vacío antes de realizar la operación de envío.
+
+----------------------------------------------------------------------
+
+-3er Script-
+
+Script integra datos de la API de Bybit y Google Sheets.
+
+Chupa los datos sobre activos admitidos como garantía y sus tasas de financiamiento, crea un DataFrame con estos datos y luego envía ese DataFrame a una hoja de cálculo de Google Sheets.
+
+Es útil para monitorear y registrar información en google sheet desde un entorno de Python.
