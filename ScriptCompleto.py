@@ -4,8 +4,8 @@ import gspread
 import pandas as pd
 import requests
 
-API_KEY = ''
-API_SECRET = ''
+API_KEY = 'JT1y5FvxnyjqfVvVHs'
+API_SECRET = 'vw14SB2Qw6vhMLs7Da9F4QsP2V6jtK4mcTA6'
 
 BASE_URL = 'https://oracle.yolodc.com/relay?url=https://api.bybit.com/v5/market/tickers&category=linear'
 
