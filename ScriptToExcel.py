@@ -10,7 +10,7 @@ def enviar_a_google_sheets(df):
     try:
         # Autenticación con Google Sheets
         credentials = service_account.Credentials.from_service_account_file(
-            credentials_path, scopes=["https://spreadsheets.google.com/feeds", "https://www.googleapis.com/auth/drive"]
+            credentials_path, scopes=["", ""]
         )
 
         # Verifica si las credenciales están expiradas y actualízalas si es necesario
@@ -35,8 +35,7 @@ def enviar_a_google_sheets(df):
         else:
             # Después de enviar a Google Sheets
             print("Después de enviar a Google Sheets")
-
-        # Borra el contenido actual (opcional)
+            
         worksheet.clear()
 
         # Envía el DataFrame a Google Sheets
