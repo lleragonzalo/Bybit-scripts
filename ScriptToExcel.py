@@ -50,6 +50,5 @@ def enviar_a_google_sheets(df):
     except exceptions.GoogleAuthError as e:
         print(f"Error de autenticación con Google Sheets: {e}")
 
-# ... (tu código existente)
 
 
