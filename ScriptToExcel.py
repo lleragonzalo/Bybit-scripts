@@ -3,8 +3,6 @@ from google.auth.transport.requests import Request
 from google.oauth2 import service_account
 import gspread
 
-# ... (tu código existente)
-
 def enviar_a_google_sheets(df):
     # Ruta al archivo JSON con las credenciales
     credentials_path = 'ruta_a_tu_archivo_json_con_credenciales.json'
