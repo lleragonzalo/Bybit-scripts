@@ -1,10 +1,10 @@
 import requests
 import pandas as pd
 
-API_KEY = 'JT1y5FvxnyjqfVvVHs'
-API_SECRET = 'vw14SB2Qw6vhMLs7Da9F4QsP2V6jtK4mcTA6'
+API_KEY = ''
+API_SECRET = ''
 
-BASE_URL = 'https://oracle.yolodc.com/relay?url=https://api.bybit.com/v5/market/tickers&category=linear'  # Reemplaza con tu URL específica de la API de Bybit
+BASE_URL = '/api.bybit.com/v5/market/tickers&category=linear'   
 
 def obtener_activos_collateral():
     endpoint = '/v2/public/symbols'
@@ -48,7 +48,7 @@ def crear_dataframe(activos_collateral, tasas_financiamiento):
     return df
 
 
-#Función principal
+
 def main():
     activos_collateral = obtener_activos_collateral()
     tasas_financiamiento = obtener_tasas_financiamiento()

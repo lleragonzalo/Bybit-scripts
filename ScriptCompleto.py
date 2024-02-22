@@ -4,10 +4,10 @@ import gspread
 import pandas as pd
 import requests
 
-API_KEY = 'JT1y5FvxnyjqfVvVHs'
-API_SECRET = 'vw14SB2Qw6vhMLs7Da9F4QsP2V6jtK4mcTA6'
+API_KEY = ''
+API_SECRET = ''
 
-BASE_URL = 'https://oracle.yolodc.com/relay?url=https://api.bybit.com/v5/market/tickers&category=linear'
+BASE_URL = 'api.bybit.com/v5/market/tickers&category=linear'
 
 def obtener_activos_collateral():
     endpoint = '/v2/public/symbols'
@@ -52,14 +52,14 @@ def enviar_a_google_sheets(df):
 
     try:
         credentials = service_account.Credentials.from_service_account_file(
-            credentials_path, scopes=["https://spreadsheets.google.com/feeds", "https://www.googleapis.com/auth/drive"]
+            credentials_path, scopes=["", ""]
         )
         if credentials.expired:
             credentials.refresh(Request())
 
         gc = gspread.authorize(credentials)
 
-        spreadsheet_id = '1QzXKS9Wk3Hd_vT5haAY2z2yo01ouQ50S8Ilr5IVaOLc'
+        spreadsheet_id = ''
 
         worksheet = gc.open_by_key(spreadsheet_id).sheet1
 

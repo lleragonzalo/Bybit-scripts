@@ -3,7 +3,7 @@ import pandas as pd
 
 
 def obtener_activos_collateral():
-    endpoint = 'https://api.bybit.com/v5/public/tickers'
+    endpoint = 'https://api-testnet.bybit.com/v5/lending/info?coin=ETH'
     url = endpoint
 
     try:
