@@ -33,7 +33,6 @@ function escribirDatosEnHoja(dataSets, fundingRates) {
   }
 }
 
-
 function obtenerDatosFundingRates() {
   var fundingApiUrl = 'https://oracle.yolodc.com/relay?url=https://api.bybit.com/v5/market/tickers&category=linear';
   var fundingResponse = UrlFetchApp.fetch(fundingApiUrl);
@@ -75,7 +74,6 @@ function obtenerDatosFundingRates() {
     var monedasProcesadas = new Set();
 
 commonCurrencies.forEach(function(currency) {
-  // Verifica si la moneda ya ha sido procesada
   if (!monedasProcesadas.has(currency)) {
     var dataSet = dataSets.find(function(data) {
       return data.currency.replace("USDT", "") === currency.replace("USDT", "");
@@ -87,7 +85,6 @@ commonCurrencies.forEach(function(currency) {
       });
 
       if (fundingRate) {
-        // Agrega la fila solo si la moneda no ha sido procesada previamente
         hojaDatos.appendRow([
           dataSet.currency,
           dataSet.borrowable,
@@ -101,7 +98,6 @@ commonCurrencies.forEach(function(currency) {
           parseFloat(fundingRate.fundingRate) || 0
         ]);
 
-        // Agrega la moneda al conjunto de monedas procesadas
         monedasProcesadas.add(currency);
       }
     }
@@ -113,7 +109,6 @@ commonCurrencies.forEach(function(currency) {
   }
 }
 
-// Función auxiliar para obtener la tasa de financiamiento correspondiente a la moneda, ignorando "USDT"
 function obtenerFundingRate(fundingRates, currency) {
   // Busca la moneda en fundingRates, ignorando "USDT"
   var cleanedCurrency = currency.replace("USDT", "");
@@ -162,8 +157,8 @@ function jsonToDataArray(json) {
 }
 
 function obtenerDatosBorrowing() {
-  var API_KEY = "JT1y5FvxnyjqfVvVHs";
-  var API_SECRET = "vw14SB2Qw6vhMLs7Da9F4QsP2V6jtK4mcTA6";
+  var API_KEY = "";
+  var API_SECRET = "";
 
   var monedas = ['USDT', 'BTC', 'ETH'];
 
@@ -216,7 +211,6 @@ if (listData.length > 0) {
     }
   }
 
-  // Si dataSets está vacío o no es un array, regresa un array vacío
   return Array.isArray(dataSets) ? dataSets : [];
 }
 
@@ -239,8 +233,8 @@ function columnaSumatoria() {
 
   // Calcular y añadir la sumatoria para cada fila
   for (var i = 1; i < datos.length; i++) {
-    var tasaInteresHoraria = datos[i][3]; // Suponiendo que la Tasa de Interés Horaria está en la cuarta columna
-    var tasaFinanciacion = datos[i][9]; // Suponiendo que la Tasa de Financiación está en la décima columna
+    var tasaInteresHoraria = datos[i][3]; 
+    var tasaFinanciacion = datos[i][9]; 
 
     var sumaTasa = tasaInteresHoraria + tasaFinanciacion;
     hoja.getRange(i + 1, nuevaColumnaIndex).setValue(sumaTasa);
@@ -268,9 +262,8 @@ function columnaFundingRateAnual() {
 
   // Calcular y añadir la tasa de financiamiento anual para cada fila
   for (var i = 1; i < datos.length; i++) {
-    var tasaFinanciacion = datos[i][9]; // Suponiendo que la Tasa de Financiación está en la décima columna
+    var tasaFinanciacion = datos[i][9]; 
 
-    // Suponiendo que la Tasa de Financiación es anual, de lo contrario, ajusta la fórmula según tu necesidad
     var tasaFinanciacionAnual = tasaFinanciacion * 365 * 24;
 
     hoja.getRange(i + 1, nuevaColumnaIndex).setValue(tasaFinanciacionAnual);
@@ -296,9 +289,8 @@ function columnaFundingRateAnualPorcentaje() {
   var nuevaColumnaIndex = datos[0].length + 1;
   hoja.getRange(1, nuevaColumnaIndex).setValue("Funding Rate Anual (%)");
 
-  // Calcular y añadir la tasa de financiamiento anual en porcentaje para cada fila
   for (var i = 1; i < datos.length; i++) {
-    var tasaFinanciacionAnual = datos[i][datos[0].length - 1]; // Tomar el valor de la columna de Funding Rate Anual
+    var tasaFinanciacionAnual = datos[i][datos[0].length - 1];
 
     // Convertir la tasa de financiamiento anual a porcentaje
     var tasaFinanciacionAnualPorcentaje = tasaFinanciacionAnual * 100;
@@ -319,14 +311,11 @@ function columnaDiferenciaFundingBorrowRates() {
     return;
   }
 
-  // Obtener datos actuales
   var datos = hoja.getDataRange().getValues();
 
-  // Añadir encabezado de nueva columna
   var nuevaColumnaIndex = datos[0].length + 1;
   hoja.getRange(1, nuevaColumnaIndex).setValue("Diferencia Funding-Borrow Rates");
 
-  // Calcular y añadir la diferencia para cada fila
   for (var i = 1; i < datos.length; i++) {
     var tasaFundingAnualPorcentaje = datos[i][datos[0].length - 2]; // Obtener la tasa de financiamiento anual en porcentaje
     var tasaBorrowAnualPorcentaje = datos[i][datos[0].length - 3]; // Obtener la tasa de préstamo anual en porcentaje
