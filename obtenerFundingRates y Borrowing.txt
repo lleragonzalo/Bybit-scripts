@@ -1,0 +1,89 @@
+function obtenerFundingRates() {
+  // URL de la API para obtener datos de funding
+  var fundingApiUrl = 'https://oracle.yolodc.com/relay?url=https://api.bybit.com/v5/market/tickers&category=linear';
+
+  // Realizar la solicitud a la API de funding
+  var fundingResponse = UrlFetchApp.fetch(fundingApiUrl);
+
+  // Verificar si la solicitud de funding fue exitosa (código de respuesta 200)
+  if (fundingResponse.getResponseCode() == 200) {
+    var fundingData = JSON.parse(fundingResponse.getContentText());
+    Logger.log("Datos de Funding: " + JSON.stringify(fundingData));
+
+    // URL de la API para obtener datos de borrowing
+    var borrowingApiUrl = 'https://oracle.yolodc.com/relay?url=https://api.bybit.com/v5/spot-margin-trade/data';
+    
+    // Realizar la solicitud a la API de borrowing
+    var borrowingResponse = UrlFetchApp.fetch(borrowingApiUrl);
+
+    // Verificar si la solicitud de borrowing fue exitosa (código de respuesta 200)
+    if (borrowingResponse.getResponseCode() == 200) {
+      var borrowingData = JSON.parse(borrowingResponse.getContentText());
+      Logger.log("Datos de Borrowing: " + JSON.stringify(borrowingData));
+
+      // Obtener la hoja de cálculo activa
+      var hojaCalculo = SpreadsheetApp.getActiveSpreadsheet();
+
+      // Seleccionar la hoja en la que deseas escribir los datos
+      var nombreHoja = "NombreDeTuHoja";
+      var hojaDatos = hojaCalculo.getSheetByName(nombreHoja);
+
+      // Crear la hoja de datos si no existe
+      if (!hojaDatos) {
+        hojaDatos = hojaCalculo.insertSheet(nombreHoja);
+      } else {
+        // Limpiar la hoja de cálculo antes de agregar nuevos datos
+        hojaDatos.clear();
+      }
+
+      // Añadir nombres de columna para los datos
+      hojaDatos.appendRow(["Par", "Funding Rate", "Borrowing Currency", "Hourly Borrow Rate"]);
+
+      // Iterar sobre la lista de pares de trading de funding
+      fundingData.result.list.forEach(function(pair_data) {
+        var symbol = pair_data.symbol;
+        var funding_rate = parseFloat(pair_data.fundingRate) || 0;
+
+        // Agrega esta línea para obtener los datos de borrowing en minúsculas
+        var borrowing_data = obtenerTasaDeBorrowing(borrowingData, symbol.toLowerCase());
+
+        Logger.log("Par: " + symbol + ", Funding Rate: " + funding_rate + ", Borrowing Data: " + JSON.stringify(borrowing_data));
+
+        // Escribir en la hoja de cálculo
+        hojaDatos.appendRow([symbol, funding_rate, borrowing_data.currency, borrowing_data.hourlyBorrowRate]);
+      });
+
+
+    } else {
+      Logger.log("Error en la solicitud de borrowing. Código de respuesta: " + borrowingResponse.getResponseCode());
+    }
+  } else {
+    Logger.log("Error en la solicitud de funding. Código de respuesta: " + fundingResponse.getResponseCode());
+  }
+}
+
+function obtenerTasaDeBorrowing(borrowingData, symbol) {
+  // Convertir el símbolo a minúsculas para hacer la comparación insensible a mayúsculas y minúsculas
+  var lowercaseSymbol = symbol.toLowerCase();
+
+  // Filtrar la lista completa de vipCoinList para el símbolo de trading actual
+  var filteredList = borrowingData.result.vipCoinList.flatMap(function(category) {
+    // Puedes agregar registros o imprimir aquí para entender mejor la estructura de datos
+    Logger.log("Categoría: " + JSON.stringify(category));
+
+    return category.list.filter(function(item) {
+      // Puedes agregar registros o imprimir aquí para entender mejor cómo se están filtrando los datos
+      Logger.log("Item: " + JSON.stringify(item));
+
+      return item.currency === lowercaseSymbol;
+    });
+  });
+
+  if (filteredList.length > 0) {
+    // Si se encuentra la tasa de borrowing para el símbolo, devolverla
+    return { currency: filteredList[0].currency, hourlyBorrowRate: parseFloat(filteredList[0].hourlyBorrowRate) || 0 };
+  }
+  
+  // Si no se encuentra la tasa de borrowing, devolver valores predeterminados
+  return { currency: "", hourlyBorrowRate: 0 };
+}
