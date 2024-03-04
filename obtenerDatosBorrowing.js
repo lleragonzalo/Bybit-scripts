@@ -2,6 +2,7 @@ function escribirDatosEnHoja(dataSets) {
   var spreadsheet = SpreadsheetApp.getActiveSpreadsheet();
   var sheet = spreadsheet.getSheetByName("Datos de Préstamos");
 
+<<<<<<< HEAD
   // Encabezados de columna, incluyendo la nueva columna
   var headers = ["Moneda", "Prestable", "Relación Colateral", "Tasa de Interés Horaria", "Orden de Liquidación", "Garantía Adicional", "Monto Máximo de Préstamo", "Tasa de Interés Anual", "Tasa de Interés Anual (%)"];
 
@@ -9,6 +10,14 @@ function escribirDatosEnHoja(dataSets) {
   sheet.getRange(1, 1, 1, headers.length).setValues([headers]);
 
   // Escribe los datos en la hoja de cálculo
+=======
+
+  var headers = ["Moneda", "Prestable", "Relación Colateral", "Tasa de Interés Horaria", "Orden de Liquidación", "Garantía Adicional", "Monto Máximo de Préstamo", "Tasa de Interés Anual", "Tasa de Interés Anual (%)"];
+
+
+  sheet.getRange(1, 1, 1, headers.length).setValues([headers]);
+
+>>>>>>> 9cf4443d7e0e107ef1a9c46a6f3a6f352a73f1fc
   for (var i = 0; i < dataSets.length; i++) {
     var rowData = [
       dataSets[i].currency,
@@ -48,9 +57,15 @@ function jsonToDataArray(json) {
       return flatObject[key];
     });
 
+<<<<<<< HEAD
     console.log("Datos procesados correctamente:", JSON.stringify(data, null, 2));  // Agregado para depurar
 
     return { data: [data], keys: keys };  // Nota: Se envuelve 'data' en un array para mantener la consistencia con la estructura de salida de jsonToDataArray
+=======
+    console.log("Datos procesados correctamente:", JSON.stringify(data, null, 2));  
+
+    return { data: [data], keys: keys };  
+>>>>>>> 9cf4443d7e0e107ef1a9c46a6f3a6f352a73f1fc
   } else {
     console.error("El argumento no es un objeto JSON válido.");
     return null;
@@ -67,7 +82,11 @@ function obtenerDatosBorrowing() {
   var sheet = spreadsheet.getSheetByName("Datos de Préstamos");
 
 
+<<<<<<< HEAD
    var dataSets = []; // Almacena todos los conjuntos de datos
+=======
+   var dataSets = []; 
+>>>>>>> 9cf4443d7e0e107ef1a9c46a6f3a6f352a73f1fc
 
   for (var i = 0; i < monedas.length; i++) {
     var symbol = monedas[i];
@@ -92,7 +111,11 @@ function obtenerDatosBorrowing() {
             annualBorrowRate: rowData.hourlyBorrowRate * 24 * 365
           };
 
+<<<<<<< HEAD
           dataSets.push(dataSet); // Agrega el conjunto de datos al arreglo
+=======
+          dataSets.push(dataSet);
+>>>>>>> 9cf4443d7e0e107ef1a9c46a6f3a6f352a73f1fc
         }
       } else {
         console.error("La lista de préstamos para " + symbol + " está vacía.");
@@ -105,14 +128,22 @@ function obtenerDatosBorrowing() {
     }
   }
 
+<<<<<<< HEAD
   console.log("Todos los dataSets:", dataSets); // Muestra todos los conjuntos de datos al final
+=======
+  console.log("Todos los dataSets:", dataSets); 
+>>>>>>> 9cf4443d7e0e107ef1a9c46a6f3a6f352a73f1fc
 
   escribirDatosEnHoja(dataSets); // Escribe los datos en la hoja de cálculo
 }
 
 
 function obtenerDatosBorrowingPorMoneda(symbol, apiKey, apiSecret) {
+<<<<<<< HEAD
   var endpoint = 'https://oracle.yolodc.com/relay?url=https://api.bybit.com/v5/spot-margin-trade/data';
+=======
+  var endpoint = '/api.bybit.com/v5/spot-margin-trade/data';
+>>>>>>> 9cf4443d7e0e107ef1a9c46a6f3a6f352a73f1fc
 
   try {
     var coin = symbol.slice(0, -4);

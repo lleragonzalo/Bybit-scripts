@@ -1,8 +1,8 @@
 import requests
 import pandas as pd
 
-API_KEY = 'JT1y5FvxnyjqfVvVHs'
-API_SECRET = 'vw14SB2Qw6vhMLs7Da9F4QsP2V6jtK4mcTA6'
+API_KEY = ''
+API_SECRET = ''
 
 BASE_URL = 'https://oracle.yolodc.com/relay?url=https://api.bybit.com/'
 
@@ -47,7 +47,7 @@ def crear_dataframe(activos_collateral, tasas_financiamiento):
     df = pd.DataFrame(data)
     return df
 
-#Función principal
+
 def main():
     activos_collateral = obtener_activos_collateral()
     tasas_financiamiento = obtener_tasas_financiamiento()

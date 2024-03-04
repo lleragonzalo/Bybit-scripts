@@ -4,15 +4,25 @@ import requests
 import time
 import pandas as pd
 
+<<<<<<< HEAD
 # Define tus claves API aquí
 API_KEY = "QtSxI1sVsGpnygrxwl"
 API_SECRET = "bUjOk7i1uZBmd3ZBYI1qELCLwojidhMuqCwf"
+=======
+
+API_KEY = ""
+API_SECRET = ""
+>>>>>>> 9cf4443d7e0e107ef1a9c46a6f3a6f352a73f1fc
 
 def obtener_datos_borrowing(symbol):
     endpoint = 'https://api.bybit.com/v5/spot-margin-trade/data'
 
     try:
+<<<<<<< HEAD
         coin = symbol[:-4]  # Extraer la moneda del símbolo (por ejemplo, "SOL" de "SOLUSDT")
+=======
+        coin = symbol[:-4] 
+>>>>>>> 9cf4443d7e0e107ef1a9c46a6f3a6f352a73f1fc
         timestamp = str(int(time.time() * 1000))
         query_params = f'timestamp={timestamp}&api_key={API_KEY}&coin={coin}'
         message = f'GET{endpoint}?{query_params}'
@@ -47,10 +57,17 @@ def main():
     print("Análisis de Datos de Borrowing en Bybit")
     print("Esta aplicación muestra información sobre préstamos (borrowing) en Bybit para varias monedas.")
 
+<<<<<<< HEAD
     # Lista de monedas obtenida de la información proporcionada
     monedas = ['USDT', 'BTC', 'ETH', 'USDC', 'XRP', 'EOS', 'LTC', 'LINK', 'XLM', 'DAI', 'USDD', 'MANA', 'DOT', 'ADA', 'DOGE', 'BNB', 'SHIB', 'BCH', 'SAND', 'AVAX', 'APE', 'MATIC', 'TRX', 'ZRX', 'CHZ', 'ATOM', 'STETH', 'GMT', 'UNI', 'IMX', 'WAVES', 'YFI', 'FTM', 'AXS', 'AAVE', 'NEAR', 'ALGO', 'OP', 'GALA', 'DYDX', 'SUSHI', 'FLOW', 'FIL', 'BAT', 'ETC', 'JASMY', 'CRV', 'COMP', 'SLP', 'ICP', 'GRT', 'EGLD', 'ENS', 'ZIL', 'THETA', 'BICO', 'QNT', 'MNT', 'LUNC', 'APT', 'MASK', 'AR', 'SOL', 'TWT', 'CORE', 'BLUR', 'HFT', 'MAGIC', 'LDO', 'ARB', 'SUI', 'PEPE', 'AGIX', 'RNDR', 'WLD', 'SEI', 'CYBER', 'ARKM', 'HBAR', 'INJ']
 
     # Lista para almacenar DataFrames de cada moneda
+=======
+
+    monedas = ['USDT', 'BTC', 'ETH', 'USDC', 'XRP', 'EOS', 'LTC', 'LINK', 'XLM', 'DAI', 'USDD', 'MANA', 'DOT', 'ADA', 'DOGE', 'BNB', 'SHIB', 'BCH', 'SAND', 'AVAX', 'APE', 'MATIC', 'TRX', 'ZRX', 'CHZ', 'ATOM', 'STETH', 'GMT', 'UNI', 'IMX', 'WAVES', 'YFI', 'FTM', 'AXS', 'AAVE', 'NEAR', 'ALGO', 'OP', 'GALA', 'DYDX', 'SUSHI', 'FLOW', 'FIL', 'BAT', 'ETC', 'JASMY', 'CRV', 'COMP', 'SLP', 'ICP', 'GRT', 'EGLD', 'ENS', 'ZIL', 'THETA', 'BICO', 'QNT', 'MNT', 'LUNC', 'APT', 'MASK', 'AR', 'SOL', 'TWT', 'CORE', 'BLUR', 'HFT', 'MAGIC', 'LDO', 'ARB', 'SUI', 'PEPE', 'AGIX', 'RNDR', 'WLD', 'SEI', 'CYBER', 'ARKM', 'HBAR', 'INJ']
+
+
+>>>>>>> 9cf4443d7e0e107ef1a9c46a6f3a6f352a73f1fc
     dataframes = []
 
     for symbol in monedas:
@@ -64,7 +81,11 @@ def main():
         else:
             print(f"No se pudieron obtener los datos de borrowing para {symbol}.")
 
+<<<<<<< HEAD
     # Combina todos los DataFrames en uno solo
+=======
+ 
+>>>>>>> 9cf4443d7e0e107ef1a9c46a6f3a6f352a73f1fc
     result_df = pd.concat(dataframes, keys=monedas)
 
     # Guarda el DataFrame en un archivo Excel
