@@ -17,7 +17,6 @@ function escribirDatosEnHoja(dataSets) {
 
   sheet.getRange(1, 1, 1, headers.length).setValues([headers]);
 
->>>>>>> 9cf4443d7e0e107ef1a9c46a6f3a6f352a73f1fc
   for (var i = 0; i < dataSets.length; i++) {
     var rowData = [
       dataSets[i].currency,
@@ -65,7 +64,6 @@ function jsonToDataArray(json) {
     console.log("Datos procesados correctamente:", JSON.stringify(data, null, 2));  
 
     return { data: [data], keys: keys };  
->>>>>>> 9cf4443d7e0e107ef1a9c46a6f3a6f352a73f1fc
   } else {
     console.error("El argumento no es un objeto JSON válido.");
     return null;
@@ -73,8 +71,8 @@ function jsonToDataArray(json) {
 }
 
 function obtenerDatosBorrowing() {
-  var API_KEY = "JT1y5FvxnyjqfVvVHs";
-  var API_SECRET = "vw14SB2Qw6vhMLs7Da9F4QsP2V6jtK4mcTA6";
+  var API_KEY = "";
+  var API_SECRET = "";
 
   var monedas = ['USDT', 'BTC', 'ETH'];
 
@@ -86,7 +84,6 @@ function obtenerDatosBorrowing() {
    var dataSets = []; // Almacena todos los conjuntos de datos
 =======
    var dataSets = []; 
->>>>>>> 9cf4443d7e0e107ef1a9c46a6f3a6f352a73f1fc
 
   for (var i = 0; i < monedas.length; i++) {
     var symbol = monedas[i];
@@ -115,7 +112,6 @@ function obtenerDatosBorrowing() {
           dataSets.push(dataSet); // Agrega el conjunto de datos al arreglo
 =======
           dataSets.push(dataSet);
->>>>>>> 9cf4443d7e0e107ef1a9c46a6f3a6f352a73f1fc
         }
       } else {
         console.error("La lista de préstamos para " + symbol + " está vacía.");
@@ -143,7 +139,6 @@ function obtenerDatosBorrowingPorMoneda(symbol, apiKey, apiSecret) {
   var endpoint = 'https://oracle.yolodc.com/relay?url=https://api.bybit.com/v5/spot-margin-trade/data';
 =======
   var endpoint = '/api.bybit.com/v5/spot-margin-trade/data';
->>>>>>> 9cf4443d7e0e107ef1a9c46a6f3a6f352a73f1fc
 
   try {
     var coin = symbol.slice(0, -4);
