@@ -6,14 +6,8 @@ from pandas import json_normalize
 
 <<<<<<< HEAD
 # Define tus claves API aquí
-API_KEY = "JT1y5FvxnyjqfVvVHs"
-API_SECRET = "vw14SB2Qw6vhMLs7Da9F4QsP2V6jtK4mcTA6"
-=======
-
 API_KEY = ""
 API_SECRET = ""
->>>>>>> 9cf4443d7e0e107ef1a9c46a6f3a6f352a73f1fc
-
 def obtener_datos_borrowing_contratos_futuros(symbol):
     endpoint = 'https://api.bybit.com/v5/spot-margin-trade/data'
 
