@@ -6,13 +6,9 @@ import pandas as pd
 
 <<<<<<< HEAD
 # Define tus claves API aquí
-API_KEY = "QtSxI1sVsGpnygrxwl"
-API_SECRET = "bUjOk7i1uZBmd3ZBYI1qELCLwojidhMuqCwf"
-=======
-
 API_KEY = ""
 API_SECRET = ""
->>>>>>> 9cf4443d7e0e107ef1a9c46a6f3a6f352a73f1fc
+=======
 
 def obtener_datos_borrowing(symbol):
     endpoint = 'https://api.bybit.com/v5/spot-margin-trade/data'
@@ -85,7 +81,6 @@ def main():
     # Combina todos los DataFrames en uno solo
 =======
  
->>>>>>> 9cf4443d7e0e107ef1a9c46a6f3a6f352a73f1fc
     result_df = pd.concat(dataframes, keys=monedas)
 
     # Guarda el DataFrame en un archivo Excel
